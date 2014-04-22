@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="foreground">#ff55acee</color>
-    <color name="green">#ff00aa00</color>
-    <color name="fog">#aaaaaaaa</color>
+    <color name="foreground">#227700</color>
+    <color name="ok">#00aa00</color>
+    <color name="warn">#eebb00</color>
+    <color name="error">#ff2222</color>
+    <color name="fog">#bbaaaaaa</color>
 </resources>

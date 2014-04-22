@@ -5,4 +5,23 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="YambaText">
+        <item name="android:textColor">@color/foreground</item>
+    </style>
+
+    <style name="YambaText.label">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="YambaText.button">
+        <item name="android:textSize">36sp</item>
+        <item name="android:background">@color/fog</item>
+    </style>
+
+    <style name="YambaText.edit">
+        <item name="android:gravity">top|left</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:background">@color/fog</item>
+    </style>
 </resources>

@@ -1,0 +1,5 @@
+<resources>
+    <integer name="tweet_max">140</integer>
+    <integer name="warn_max">10</integer>
+    <integer name="tweet_min">0</integer>
+</resources>
