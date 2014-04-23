@@ -8,8 +8,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
 * Created by bmeike on 4/22/14.
@@ -26,6 +28,7 @@ public class TweetFragment extends Fragment {
 
     private EditText tweetView;
     private TextView countView;
+    private Button submitButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,12 @@ public class TweetFragment extends Fragment {
 
         countView = (TextView) v.findViewById(R.id.tweet_count);
 
+        submitButton = (Button) v.findViewById(R.id.tweet_submit);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vv) { post(); }
+        });
+
         tweetView = (EditText) v.findViewById(R.id.tweet_tweet);
         tweetView.addTextChangedListener(
                 new TextWatcher() {
@@ -65,6 +74,8 @@ public class TweetFragment extends Fragment {
     void updateCount() {
         int n = tweetView.getText().length();
 
+        submitButton.setEnabled(checkTweetLen(n));
+
         n = tweetLenMax - n;
 
         int color;
@@ -74,5 +85,27 @@ public class TweetFragment extends Fragment {
 
         countView.setText(String.valueOf(n));
         countView.setTextColor(color);
+    }
+
+
+    void post() {
+        String tweet = tweetView.getText().toString();
+        if (!checkTweetLen(tweet.length())) { return; }
+
+        tweetView.setText("");
+
+        int status = R.string.tweet_failed;
+
+        try {
+            Thread.sleep(2 * 60 * 1000); // replace with actual network call
+            status = R.string.tweet_succeeded;
+        }
+        catch (Exception e) { }
+
+        Toast.makeText(getActivity(), status, Toast.LENGTH_LONG).show();
+    }
+
+    private boolean checkTweetLen(int n) {
+        return (errMax < n) && (tweetLenMax > n);
     }
 }
