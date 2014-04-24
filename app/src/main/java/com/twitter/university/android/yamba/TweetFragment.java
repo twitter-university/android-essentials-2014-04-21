@@ -1,7 +1,9 @@
 package com.twitter.university.android.yamba;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,7 +19,6 @@ import android.widget.Toast;
 * Created by bmeike on 4/22/14.
 */
 public class TweetFragment extends Fragment {
-
     private int okColor;
     private int warnColor;
     private int errColor;
@@ -87,22 +88,13 @@ public class TweetFragment extends Fragment {
         countView.setTextColor(color);
     }
 
-
     void post() {
         String tweet = tweetView.getText().toString();
         if (!checkTweetLen(tweet.length())) { return; }
 
         tweetView.setText("");
 
-        int status = R.string.tweet_failed;
-
-        try {
-            Thread.sleep(2 * 60 * 1000); // replace with actual network call
-            status = R.string.tweet_succeeded;
-        }
-        catch (Exception e) { }
-
-        Toast.makeText(getActivity(), status, Toast.LENGTH_LONG).show();
+        YambaService.post(getActivity(), tweet);
     }
 
     private boolean checkTweetLen(int n) {
