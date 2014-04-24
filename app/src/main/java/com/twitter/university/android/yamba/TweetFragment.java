@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.twitter.university.android.yamba.service.YambaServiceHelper;
+
 /**
 * Created by bmeike on 4/22/14.
 */
@@ -94,7 +96,7 @@ public class TweetFragment extends Fragment {
 
         tweetView.setText("");
 
-        YambaService.post(getActivity(), tweet);
+        YambaServiceHelper.post(getActivity(), tweet);
     }
 
     private boolean checkTweetLen(int n) {
