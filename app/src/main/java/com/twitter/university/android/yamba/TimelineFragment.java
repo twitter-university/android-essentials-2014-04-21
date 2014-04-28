@@ -27,18 +27,18 @@ public class TimelineFragment extends ListFragment implements LoaderManager.Load
     private static final int TIMELINE_LOADER = 42;
 
     private static final String[] FROM = new String[] {
-            YambaContract.Timeline.Columns.HANDLE,
-            YambaContract.Timeline.Columns.TIMESTAMP,
-            YambaContract.Timeline.Columns.TWEET
+        YambaContract.Timeline.Columns.HANDLE,
+        YambaContract.Timeline.Columns.TIMESTAMP,
+        YambaContract.Timeline.Columns.TWEET
     };
 
     private static final int[] TO = new int[] {
-            R.id.timeline_handle,
-            R.id.timeline_timestamp,
-            R.id.timeline_tweet
+        R.id.timeline_handle,
+        R.id.timeline_timestamp,
+        R.id.timeline_tweet
     };
 
-     class TimelineBinder implements SimpleCursorAdapter.ViewBinder {
+    class TimelineBinder implements SimpleCursorAdapter.ViewBinder {
 
         @Override
         public boolean setViewValue(View view, Cursor cursor, int colId) {
@@ -59,12 +59,12 @@ public class TimelineFragment extends ListFragment implements LoaderManager.Load
         View v = super.onCreateView(inflater, container, state);
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-                getActivity(),
-                R.layout.timeline_row,
-                null,
-                FROM,
-                TO,
-                0);
+            getActivity(),
+            R.layout.timeline_row,
+            null,
+            FROM,
+            TO,
+            0);
         adapter.setViewBinder(new TimelineBinder());
         setListAdapter(adapter);
 
@@ -76,25 +76,23 @@ public class TimelineFragment extends ListFragment implements LoaderManager.Load
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(
-                getActivity(),
-                YambaContract.Timeline.URI,
-                null,
-                null,
-                null,
-                YambaContract.Timeline.Columns.TIMESTAMP + " DESC");
+            getActivity(),
+            YambaContract.Timeline.URI,
+            null,
+            null,
+            null,
+            YambaContract.Timeline.Columns.TIMESTAMP + " DESC");
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int p, long id) {
         Cursor c = (Cursor) l.getItemAtPosition(p);
-
-        Intent i = TimelineDetailFragment.marshallDetails(
-                getActivity(),
-                c.getLong(c.getColumnIndex(YambaContract.Timeline.Columns.TIMESTAMP)),
-                c.getString(c.getColumnIndex(YambaContract.Timeline.Columns.HANDLE)),
-                c.getString(c.getColumnIndex(YambaContract.Timeline.Columns.TWEET)));
-
-        //startActivity(i);
+        Intent i = TimelineDetailFragment.showDetails(
+            getActivity(),
+            c.getLong(c.getColumnIndex(YambaContract.Timeline.Columns.TIMESTAMP)),
+            c.getString(c.getColumnIndex(YambaContract.Timeline.Columns.HANDLE)),
+            c.getString(c.getColumnIndex(YambaContract.Timeline.Columns.TWEET)));
+        startActivity(i);
     }
 
     @Override

@@ -26,6 +26,10 @@
                 android:name="com.twitter.university.android.yamba.TweetActivity"
                 android:label="@string/app_name">
         </activity>
+        <activity
+                android:name="com.twitter.university.android.yamba.TimelineDetailActivity"
+                android:label="@string/app_name">
+        </activity>
     </application>
 
 </manifest>
